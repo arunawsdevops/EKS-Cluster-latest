@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blue-deployment
+spec:
+  replicas: 3  # This defines how many replicas you want
+  selector:
+    matchLabels:
+      app: blue-app
+  template:
+    metadata:
+      labels:
+        app: blue-app  # This is used to link the pods to the deployment
+    spec:
+      containers:
+        - name: blue
+          image: remyars/blue-app:latest
+          ports:
+            - containerPort: 80
+      tolerations:
+        - key: "app"
+          operator: "Equal"
+          value: "blue"
+          effect: "NoSchedule"

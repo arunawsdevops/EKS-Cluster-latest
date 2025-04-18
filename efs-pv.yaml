@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: efs-pv
+spec:
+  capacity:
+    storage: 5Gi  # Adjust this to the size you need
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany  # EFS supports ReadWriteMany, allowing multiple pods to access the volume
+  persistentVolumeReclaimPolicy: Retain  # Policy when PVC is deleted
+  storageClassName: efs-sc  # The storage class we created earlier
+  csi:
+    driver: efs.csi.aws.com
+    volumeHandle: fs-0bd35d713f47c0900  # Replace with your EFS filesystem ID
+    volumeAttributes:
+      path: "/"  # Path within the EFS mount

@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blue-app
+  namespace: default  # Replace with your desired namespace
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      name: my-app  # Ensure this matches the label of your service
+  template:
+    metadata:
+      labels:
+        name: my-app
+    spec:
+      containers:
+        - name: blue
+          image: remyars/blue-app:latest
+          ports:
+            - containerPort: 80
+          env:
+            - name: METRICS_PATH  # Make sure your app exposes metrics on /metrics
+              value: "/metrics"  

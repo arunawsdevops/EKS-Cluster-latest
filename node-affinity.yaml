@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blue-app
+spec:
+  replicas: 3 
+  selector:
+    matchLabels:
+      name: my-app
+  template:
+    metadata:
+      labels:
+        name: my-app
+    spec:
+      containers:
+      - name: blue
+        image: remyars/blue-app:latest
+        ports:
+        - containerPort: 80
+          protocol: TCP
+      affinity:
+       nodeAffinity:
+         requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+           - matchExpressions:
+             - key: size
+               operator: In
+               values: 
+                 - large
+                 - medium
