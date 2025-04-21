@@ -29,7 +29,7 @@ kubectl label nodes ip-192-168-1-1.ec2.internal size=large-
 
 ## taints and tolerations ##
 
-## 🛡 Taints and Tolerations in Kubernetes
+##  Taints and Tolerations in Kubernetes
 
 Taints and tolerations are used to **control which pods can run on which nodes**.
 
