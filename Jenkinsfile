@@ -6,7 +6,7 @@ pipeline {
             steps {
                 script {
                     withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'k8-cred-jenkins', namespace: '', restrictKubeConfigAccess: false, serverUrl: ''){
-                        bat 'kubectl get nodes'
+                        sh 'kubectl get nodes'
                     }
                 }
             }
